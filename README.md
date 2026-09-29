@@ -1,11 +1,11 @@
-# SYDE 572 — Assignment 1
+# SYDE 572 — Homework
 
-Manual Newton–Raphson and Golden Section closest-point searches, plus analytical and sequential Newton least-squares fitting.
+Course homework, code, handwritten work, and results in one repository.
 
-- [Assignment documentation and run instructions](assignment1/README.md)
-- [GitHub Pages website](https://ayaaniqbal.github.io/SYDE572_HW1/)
-- [Website source](docs/index.html)
-- [Handwritten Part 1 (PDF)](docs/assets/HW1-Part-1.pdf)
-- [Handwritten Part 2 (PDF)](docs/assets/HW1-Part-2.pdf)
+[Visit the course website](https://ayaaniqbal.github.io/SYDE572/)
 
-The `docs/` directory is the GitHub Pages publishing source. Its figures, code downloads, and histories are copies of the corresponding assignment outputs; refresh them when updating the algorithms.
+| Assignment | Files and instructions | Website |
+| --- | --- | --- |
+| Homework 1 — Numerical optimization | [HW1](HW1/README.md) | [View Homework 1](https://ayaaniqbal.github.io/SYDE572/HW1/docs/) |
+
+Each assignment lives in its own folder (`HW1`, `HW2`, and so on). The root homepage links to the available assignment websites. GitHub Pages serves the `main` branch from the repository root.

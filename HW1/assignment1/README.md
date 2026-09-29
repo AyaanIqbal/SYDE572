@@ -1,6 +1,6 @@
 # SYDE 572 Assignment 1 — Python
 
-From the repository root:
+From the `HW1` directory (`cd HW1` from the repository root):
 
 ```sh
 python3 -m venv .venv
