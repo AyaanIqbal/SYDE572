@@ -1,6 +1,6 @@
 # Homework 1
 
-[Website](https://ayaaniqbal.github.io/SYDE572/HW1/docs/)
+[Website](https://ayaaniqbal.github.io/SYDE572/HW1/)
 
 - [Handwritten Part 1](docs/assets/HW1-Part-1.pdf)
 - [Handwritten Part 2](docs/assets/HW1-Part-2.pdf)
