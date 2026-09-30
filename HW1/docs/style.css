@@ -3,3 +3,5 @@
 header{align-items:center}.student{margin-left:auto;text-align:right;line-height:1.4}.student span{font-size:.85rem;color:#52616b}li{margin:6px 0}
 
 .code-panel{margin:16px 0 12px;border:1px solid #344859;border-radius:8px;overflow:hidden;background:#142330;color:#e1e8ef}.code-label{display:flex;justify-content:space-between;gap:16px;padding:10px 16px;background:#1c3040;border-bottom:1px solid #344859;color:#c5d4e0;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.code-label span{color:#9ecfbd}.code-panel pre{margin:0;padding:18px;background:transparent;tab-size:4;line-height:1.65;overflow-x:auto}.code-panel code{font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;color:#e1e8ef}.tok-kw{color:#d4adff}.tok-str{color:#b1df9b}.tok-num{color:#ffcd89}.tok-comment{color:#9eafbc;font-style:italic}.tok-name{color:#b7daf5}.tok-op{color:#f0a5b6}h4{font-size:1rem;margin-bottom:8px}
+
+.code-caption{margin-top:8px;color:#52616b;font-size:.9rem;line-height:1.5}
