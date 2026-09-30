@@ -1,7 +1,6 @@
 """Manual closest-point searches. Run this file to generate the demonstrations."""
 from math import isfinite, sqrt
 from pathlib import Path
-import json
 
 
 def _validate(tol, max_iter):
@@ -136,16 +135,13 @@ def main():
                (0, 0), 0.2, (0, 0.7), (-0.5, 1.2), 'y = x³ − 2x + 1'),
               ('exponential', exp, exp, exp, (0, 0), 0.0,
                (-1, 0), (-1.5, 0.8), 'y = exp(x)')]
-    results = {}
     for name, f, df, ddf, point, guess, interval, bounds, title in cases:
         n = newton_closest_point(f, df, ddf, *point, guess)
         g = golden_section_closest_point(f, *point, *interval)
         assert n['converged'] and g['converged'], (name, n['status'], g['status'])
         assert abs(n['x']-g['x']) < 1e-6, name
-        results[name] = dict(newton=n, golden=g)
         print(f'{name:14s} Newton x={n["x"]: .9f}  Golden x={g["x"]: .9f}  distance={n["distance"]:.9f}')
         plot_search(f, point, n, g, bounds, title, output / f'part1_{name}.png')
-    (output / 'part1_history.json').write_text(json.dumps(results, indent=2))
 
 
 if __name__ == '__main__':
