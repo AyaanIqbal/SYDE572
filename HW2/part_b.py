@@ -79,7 +79,8 @@ The fit alone does not establish why this association occurs.
 
 RM and DIS are Python feature indices 5 and 7 (CSV feature positions 6 and 8).
 With the bias first, they are entries 6 and 8 in the weight vector. Identify
-them by name to avoid the assignment's feature-number ambiguity.
+them by name. These are the 6th and 8th features specified in the instructor's
+assignment correction; the corrected numbering does not change this fit.
 
 CHAS is zero throughout the training subset. Its coefficient is therefore
 unidentifiable from these observations; the least-squares solver returns zero
