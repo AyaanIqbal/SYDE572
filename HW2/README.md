@@ -1,4 +1,4 @@
-# Assignment 2 — Parts A–E
+# Assignment 2 — Parts A–F
 
 From the repository root:
 
@@ -9,6 +9,7 @@ python HW2/part_b.py
 python HW2/part_c.py
 python HW2/part_d.py
 python HW2/part_e.py
+python HW2/part_f.py
 ```
 
 With this repository's existing environment, run `.venv/bin/python HW2/part_a.py`.
@@ -78,3 +79,14 @@ space, since the assignment does not specify it. No test-based tuning is used.
 The script saves `plots/part_e_rmse.png`, `results/part_e_errors.csv`,
 `results/part_e_centre_order.csv` (zero-based training indices), and
 `results/part_e_notes.md`.
+
+## Part F
+
+Run `.venv/bin/python HW2/part_f.py` for 90 Gaussian basis functions using
+all features, sigma = 1, and the same seven lambda candidates as Part D.
+Ten-fold CV uses only the first 100 rows with seed 572. Each fold learns
+normalization and selects centres exclusively from its 90 training rows;
+all 90 rows become centres. The bias is unpenalized, and the objective uses
+summed squared residuals. Outputs include `plots/part_f_cross_validation.png`,
+`results/part_f_cv_errors.csv`, `results/part_f_notes.md`, and the selected
+model refitted on all 100 rows in `results/part_f_model.npz`.

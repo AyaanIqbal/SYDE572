@@ -1,0 +1,122 @@
+"""Part F: 90 Gaussian basis functions with L2 regularization and 10-fold CV."""
+
+from part_e import ROOT, gaussian_basis, rmse
+from part_d import LAMBDAS
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+def gaussian_regression_reg(x_train, y_train, regularization, n_basis=90,
+                            sigma=1.0, seed=572):
+    """Fit SSE + lambda * squared non-bias weights using training-only centres."""
+    if not np.isfinite(regularization) or regularization < 0:
+        raise ValueError("regularization must be finite and nonnegative")
+    if not 1 <= n_basis <= len(x_train):
+        raise ValueError("n_basis must not exceed the training size")
+    mean = x_train.mean(axis=0)
+    scale = x_train.std(axis=0)
+    scale = np.where(scale == 0, 1.0, scale)
+    train = (x_train - mean) / scale
+    indices = np.random.default_rng(seed).permutation(len(train))[:n_basis]
+    centres = train[indices]
+    basis = gaussian_basis(train, centres, sigma)
+    penalty = np.eye(n_basis + 1)[1:]
+    augmented = np.vstack([basis, np.sqrt(regularization) * penalty])
+    targets = np.concatenate([y_train, np.zeros(n_basis)])
+    weights = np.linalg.lstsq(augmented, targets, rcond=None)[0]
+    return {"weights": weights, "mean": mean, "scale": scale,
+            "centres": centres, "centre_indices": indices, "sigma": sigma,
+            "regularization": regularization}
+
+
+def predict(model, x):
+    return gaussian_basis((x - model["mean"]) / model["scale"],
+                          model["centres"], model["sigma"]) @ model["weights"]
+
+
+def cross_validate(x, y, lambdas=LAMBDAS, seed=572):
+    """Reuse identical folds/centres across lambdas; exclude validation centres.
+
+    Each fold has 90 training rows, so all 90 become Gaussian centres.
+    Both scaling and centre selection are refitted inside each fold.
+    """
+    if len(x) != 100 or len(y) != 100:
+        raise ValueError("Part F requires the first 100 observations")
+    folds = np.array_split(np.random.default_rng(seed).permutation(100), 10)
+    errors = np.empty((len(lambdas), 10))
+    for i, validation in enumerate(folds):
+        training = np.concatenate([fold for j, fold in enumerate(folds) if j != i])
+        for j, value in enumerate(lambdas):
+            model = gaussian_regression_reg(x[training], y[training], value, seed=seed)
+            errors[j, i] = rmse(y[validation], predict(model, x[validation]))
+    return errors
+
+
+def main():
+    data = np.loadtxt(ROOT / "data/boston_house_prices.csv", delimiter=",", skiprows=2)
+    x, y = data[:100, :-1], data[:100, -1]
+    errors = cross_validate(x, y)
+    means = errors.mean(axis=1)
+    best = int(np.argmin(means))
+    chosen = LAMBDAS[best]
+    output, plots = ROOT / "results", ROOT / "plots"
+    output.mkdir(exist_ok=True)
+    plots.mkdir(exist_ok=True)
+    np.savetxt(output / "part_f_cv_errors.csv", np.column_stack([LAMBDAS, means, errors]),
+               delimiter=",", comments="", fmt="%.10g",
+               header="lambda,mean_validation_rmse," + ",".join(f"fold_{i}_rmse" for i in range(1, 11)))
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.semilogx(LAMBDAS[1:], means[1:], "o-", label="Mean 10-fold validation RMSE")
+    ax.axhline(means[0], color="tab:orange", linestyle="--",
+               label=f"Unregularized baseline (lambda = 0): {means[0]:.3f}")
+    if chosen > 0:
+        ax.plot(chosen, means[best], "*", color="tab:red", markersize=15,
+                label=f"Selected lambda = {chosen:g}")
+    ax.set(xlabel="Regularization constant lambda (logarithmic scale)",
+           ylabel="Mean validation RMSE ($1000)",
+           title="Part F: 90 Gaussian basis functions (sigma = 1)")
+    ax.grid(True, which="both", alpha=0.25)
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(plots / "part_f_cross_validation.png", dpi=200)
+    plt.close(fig)
+    np.savez(output / "part_f_model.npz", **gaussian_regression_reg(x, y, chosen))
+    table = "\n".join(f"| {value:g} | {error:.6f} |" for value, error in zip(LAMBDAS, means))
+    (output / "part_f_notes.md").write_text(f"""# Part F: regularized Gaussian regression
+
+All 13 features and the first 100 observations are used. The model has 90
+Gaussian basis functions plus an unpenalized bias. As in Part E, sigma = 1
+in standardized feature space; it is fixed rather than tuned on the test set.
+The objective is summed squared residuals + lambda * sum(w[1:]^2).
+Augmented least squares fits the model without explicit matrix inversion.
+
+Ten-fold cross-validation uses a seeded permutation (seed 572), with 90
+training rows and ten validation rows per fold. Normalization is learned
+only from those 90 training rows. All 90 become centres, so no validation
+row is used as a centre. Folds and centres are identical across lambda
+candidates. The remaining 406 observations are not used to choose lambda.
+The reported metric is the arithmetic mean of the ten fold RMSE values.
+
+| Lambda | Mean validation RMSE ($1000) |
+| --- | ---: |
+{table}
+
+Choose **lambda = {chosen:g}**, which minimizes average validation RMSE
+({means[best]:.6f}) among the specified candidates. The unregularized
+baseline is {means[0]:.6f}. The plot uses a logarithmic lambda axis and
+shows lambda = 0 as a horizontal baseline. Regularization limits coefficient
+magnitudes and can reduce overfitting; very strong penalties suppress the
+Gaussian contributions and move the model toward a constant prediction.
+This selection depends on the fixed Gaussian width, normalization, fold
+split, and summed-error convention for lambda.
+
+The selected model is refitted on all 100 training observations, selecting
+90 centres from their seeded permutation, and saved in part_f_model.npz.
+""")
+    for value, error in zip(LAMBDAS, means):
+        print(f"lambda = {value:7g}: mean validation RMSE = {error:.6f}")
+    print(f"Selected lambda: {chosen:g}")
+
+
+if __name__ == "__main__":
+    main()
