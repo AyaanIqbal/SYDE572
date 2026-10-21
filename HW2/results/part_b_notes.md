@@ -1,8 +1,8 @@
 # Part B: degree-1 weights
 
-The model uses the first 100 observations, all 13 features, and a bias.
-Features are standardized as z_j = (x_j - mean_j) / std_j, using training
-statistics. The target is not normalized and is measured in $1000.
+Coefficients predict house value in $1000. Normalized weights correspond to
+one training standard deviation; original-unit weights correspond to one
+unit of the original feature. The bias is included below.
 
 | Feature | Normalized weight | Original-unit weight |
 | --- | ---: | ---: |
@@ -21,46 +21,15 @@ statistics. The target is not normalized and is measured in $1000.
 | B | 0.181073 | 0.006645 |
 | LSTAT | 0.148761 | 0.026230 |
 
-The normalized model is y_hat = w_0 + sum(w_j z_j). Each normalized feature
-weight describes the predicted change in $1000 for a one-training-standard-
-deviation increase, holding other features fixed. To interpret changes in
-original units, use beta_j = w_j / std_j and
-beta_0 = w_0 - sum(beta_j mean_j). These two forms give identical predictions.
+**RM (6th feature):** One additional average room predicts about
+$8,591 higher value, holding other features fixed. The
+positive coefficient is reasonable because larger homes generally cost more.
 
-## Rooms per dwelling (RM)
+**DIS (8th feature):** One additional distance unit predicts about
+$7.63 higher value, holding other features fixed. The
+positive sign is less intuitive if proximity to employment increases value,
+but the effect is tiny and may reflect correlated features and the limited
+training sample. These associations are not causal conclusions.
 
-The normalized weight is 4.195634. The training standard deviation
-is 0.488378 rooms, so the original-unit coefficient is
-8.590961 ($1000 per room). Holding all other features fixed, one more
-room per dwelling increases the predicted median house value by approximately
-$8,591. The positive sign is reasonable: larger homes would
-generally be expected to have higher values. This is a fitted association,
-not a causal estimate.
-
-## Distance to employment centres (DIS)
-
-The normalized weight is 0.010715. The training standard deviation
-is 1.404998 distance units, so the original-unit coefficient
-is 0.007627 ($1000 per dataset distance unit). Holding other features
-fixed, a one-unit increase in weighted distance increases predicted value by
-approximately $7.63. This effect is very small compared
-with RM: a one-standard-deviation increase changes the prediction by only
-$10.72. Its positive sign may initially seem
-surprising if proximity to employment is expected to increase value. However,
-this coefficient describes a conditional association in the first 100 rows;
-correlated features and the restricted training sample can affect its sign.
-The fit alone does not establish why this association occurs.
-
-## Indexing and limitations
-
-RM and DIS are Python feature indices 5 and 7 (CSV feature positions 6 and 8).
-With the bias first, they are entries 6 and 8 in the weight vector. Identify
-them by name. These are the 6th and 8th features specified in the instructor's
-assignment correction; the corrected numbering does not change this fit.
-
-CHAS is zero throughout the training subset. Its coefficient is therefore
-unidentifiable from these observations; the least-squares solver returns zero
-in its minimum-norm solution. This is not evidence that CHAS has no effect.
-The model has training RMSE 2.037201 and test RMSE
-36.444950 (both in $1000), so interpretation of coefficient
-magnitudes should account for its poor generalization to the test subset.
+CHAS is constant in the training data, so its zero coefficient is not evidence
+of no effect; its influence cannot be estimated from this subset.

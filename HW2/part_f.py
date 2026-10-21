@@ -81,37 +81,11 @@ def main():
     fig.savefig(plots / "part_f_cross_validation.png", dpi=200)
     plt.close(fig)
     np.savez(output / "part_f_model.npz", **gaussian_regression_reg(x, y, chosen))
-    table = "\n".join(f"| {value:g} | {error:.6f} |" for value, error in zip(LAMBDAS, means))
     (output / "part_f_notes.md").write_text(f"""# Part F: regularized Gaussian regression
 
-All 13 features and the first 100 observations are used. The model has 90
-Gaussian basis functions plus an unpenalized bias. As in Part E, sigma = 1
-in standardized feature space; it is fixed rather than tuned on the test set.
-The objective is summed squared residuals + lambda * sum(w[1:]^2).
-Augmented least squares fits the model without explicit matrix inversion.
-
-Ten-fold cross-validation uses a seeded permutation (seed 572), with 90
-training rows and ten validation rows per fold. Normalization is learned
-only from those 90 training rows. All 90 become centres, so no validation
-row is used as a centre. Folds and centres are identical across lambda
-candidates. The remaining 406 observations are not used to choose lambda.
-The reported metric is the arithmetic mean of the ten fold RMSE values.
-
-| Lambda | Mean validation RMSE ($1000) |
-| --- | ---: |
-{table}
-
-Choose **lambda = {chosen:g}**, which minimizes average validation RMSE
-({means[best]:.6f}) among the specified candidates. The unregularized
-baseline is {means[0]:.6f}. The plot uses a logarithmic lambda axis and
-shows lambda = 0 as a horizontal baseline. Regularization limits coefficient
-magnitudes and can reduce overfitting; very strong penalties suppress the
-Gaussian contributions and move the model toward a constant prediction.
-This selection depends on the fixed Gaussian width, normalization, fold
-split, and summed-error convention for lambda.
-
-The selected model is refitted on all 100 training observations, selecting
-90 centres from their seeded permutation, and saved in part_f_model.npz.
+Choose **lambda = {chosen:g}**, which gives the lowest mean 10-fold
+validation RMSE: **{means[best]:.6f}** ($1000). The unregularized
+baseline (lambda = 0) is {means[0]:.6f}, shown as a horizontal line.
 """)
     for value, error in zip(LAMBDAS, means):
         print(f"lambda = {value:7g}: mean validation RMSE = {error:.6f}")
