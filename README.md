@@ -7,7 +7,6 @@ Course homework, code, handwritten work, and results in one repository.
 | Assignment | Files and instructions | Website |
 | --- | --- | --- |
 | Homework 1 — Numerical optimization | [HW1](HW1/README.md) | [View Homework 1](https://ayaaniqbal.github.io/SYDE572/HW1/) |
-
 | Homework 2 — Basis function regression | [HW2](HW2/README.md) | [View Homework 2](https://ayaaniqbal.github.io/SYDE572/HW2/) |
 
 Each assignment lives in its own folder (`HW1`, `HW2`, and so on). The root homepage links to the available assignment websites. GitHub Pages serves the `main` branch from the repository root.
