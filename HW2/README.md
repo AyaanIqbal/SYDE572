@@ -47,8 +47,6 @@ Dataset description: [the assignment's Toronto reference](https://www.cs.toronto
 
 ## Part B
 
-Status: draft only; pending review.
-
 `part_b.py` reuses Part A's degree-1 fit, prints all weights (including the
 bias), and converts them to original feature units. It verifies that the
 converted coefficients preserve predictions on every observation.
