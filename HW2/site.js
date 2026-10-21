@@ -21,7 +21,15 @@ function renderNotes(text) {
   while (i < lines.length) {
     const line = lines[i].trim();
     if (!line) { i++; continue; }
-    if (line.startsWith("|")) {
+    if (line === "$$") {
+      const equation = [];
+      i++;
+      while (i < lines.length && lines[i].trim() !== "$$") equation.push(lines[i++]);
+      if (i < lines.length) i++;
+      const block = element("div", equation.join("\n"));
+      block.className = "equation";
+      fragment.append(block);
+    } else if (line.startsWith("|")) {
       const rows = [];
       while (i < lines.length && lines[i].trim().startsWith("|")) {
         const row = lines[i++].trim().split("|").slice(1, -1).map(x => x.trim());
@@ -44,7 +52,7 @@ function renderNotes(text) {
     } else {
       const paragraph = [line];
       i++;
-      while (i < lines.length && lines[i].trim() && !/^(#|\||- )/.test(lines[i].trim())) {
+      while (i < lines.length && lines[i].trim() && lines[i].trim() !== "$$" && !/^(#|\||- )/.test(lines[i].trim())) {
         paragraph.push(lines[i++].trim());
       }
       fragment.append(element("p", clean(paragraph.join(" "))));

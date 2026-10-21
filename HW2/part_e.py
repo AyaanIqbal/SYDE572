@@ -83,8 +83,13 @@ means and standard deviations. Zero standard deviations use a scale of one.
 The target remains in $1000. No regularization is applied.
 
 Each model uses K Gaussian functions plus a separate bias:
-phi_j(z) = exp(-||z - centre_j||^2 / (2 sigma^2)). The assignment does not
-specify a width; sigma = 1 in standardized feature space is used throughout,
+
+$$
+φⱼ(z) = exp(−‖z − cⱼ‖² / (2σ²))
+$$
+
+Here, cⱼ is centre j and σ is the Gaussian width. The assignment does not
+specify a width; σ = 1 in standardized feature space is used throughout,
 without tuning it against test errors. Results depend on this width choice.
 A seeded random permutation (seed 572) of the 100 training rows is generated;
 the first K rows supply the centres. These are nested sets as K increases.

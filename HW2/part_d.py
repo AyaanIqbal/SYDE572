@@ -89,9 +89,10 @@ def main():
 
     (output / "part_d_notes.md").write_text(f"""# Part D: regularized polynomial regression
 
-Choose **lambda = {chosen:g}**, which gives the lowest mean 10-fold
-validation RMSE: **{means[best]:.6f}** ($1000). The unregularized
-baseline (lambda = 0) is {means[0]:.6f}, shown as a horizontal line.
+Based on the 10-fold cross-validation results, choosing **λ = {chosen:g}**
+gives the lowest mean validation RMSE of **{means[best]:.6f}** ($1000) among
+the tested values. The unregularized baseline (λ = 0) has a mean validation
+RMSE of {means[0]:.6f}, shown as a horizontal line.
 """)
     # Preserve the selected model refitted on all 100 training observations.
     model = polynomial_regression_reg(x, y, chosen)
