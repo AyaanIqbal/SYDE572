@@ -73,43 +73,6 @@ def main():
     fig.tight_layout()
     fig.savefig(plots / "part_e_rmse.png", dpi=200)
     plt.close(fig)
-    table = "\n".join(f"| {int(k)} | {train:.6f} | {test:.6f} |"
-                       for k, train, test, _ in rows)
-    (output / "part_e_notes.md").write_text(f"""# Part E: Gaussian basis regression
-
-All 13 features are used, with the first 100 observations for training and
-the remaining 406 for testing. Features are standardized using training-only
-means and standard deviations. Zero standard deviations use a scale of one.
-The target remains in $1000. No regularization is applied.
-
-Each model uses K Gaussian functions plus a separate bias:
-
-$$
-φⱼ(z) = exp(−‖z − cⱼ‖² / (2σ²))
-$$
-
-Here, cⱼ is centre j and σ is the Gaussian width. The assignment does not
-specify a width; σ = 1 in standardized feature space is used throughout,
-without tuning it against test errors. Results depend on this width choice.
-A seeded random permutation (seed 572) of the 100 training rows is generated;
-the first K rows supply the centres. These are nested sets as K increases.
-Weights are fitted using unregularized least squares.
-
-| Gaussian basis functions | Training RMSE ($1000) | Test RMSE ($1000) |
-| --- | ---: | ---: |
-{table}
-
-Training RMSE falls from {rows[0, 1]:.3f} at K = 5 to {rows[-1, 1]:.3f}
-at K = 95 as additional basis functions increase model flexibility. Test
-RMSE stays around 9.8 through K = 65, then jumps to about 11.9 at K = 75
-and remains above 11.7. The widening gap is evidence of overfitting.
-Test error does not have to decrease with training error: the centres cover only
-the first 100 observations, and a flexible model may generalize poorly to
-the other observations. Gaussian functions are local, so predictions far
-from every centre approach the fitted bias. Interpret the plotted test
-curve as held-out evaluation, rather than using it to tune the width or
-centre selection. Part F will use cross-validation for regularization.
-""")
     for k, train, test, rank in rows:
         print(f"K = {int(k):2d}: training RMSE = {train:.6f}, test RMSE = {test:.6f}, rank = {int(rank)}")
 

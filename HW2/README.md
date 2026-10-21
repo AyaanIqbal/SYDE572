@@ -5,6 +5,9 @@
 The course homepage links to `HW2/index.html`. This page displays plots directly
 from `plots/` and loads the current notes, CSV tables, and Python source from
 their original paths. There are no copied website results to synchronize.
+Explanations live only in `results/part_*_notes.md`; edit those files directly.
+The website reads them automatically, and Python scripts never overwrite them.
+If model results change, update any numerical statements in the notes to match.
 After changing a model, rerun its Python script to regenerate its results,
 then commit and push the changed source and outputs to `main`. GitHub Pages
 publishes those changes using the repository's existing Pages configuration.
@@ -55,9 +58,8 @@ Dataset description: [the assignment's Toronto reference](https://www.cs.toronto
 `part_b.py` reuses Part A's degree-1 fit, prints all weights (including the
 bias), and converts them to original feature units. It verifies that the
 converted coefficients preserve predictions on every observation.
-It saves `results/part_b_weights.csv` and report-ready discussion in
-`results/part_b_notes.md`, including interpretation of RM and DIS and the
-constant CHAS feature in the training subset.
+It saves `results/part_b_weights.csv`. Discussion is maintained separately in
+`results/part_b_notes.md`.
 
 ## Part C
 
@@ -80,7 +82,7 @@ only the first 100 observations, with shuffled folds (seed 572) shared across
 candidates and normalization fitted separately within each training fold.
 The objective is summed squared error plus lambda times squared non-bias
 weights; the bias is not penalized. The script saves the semilog plot to
-`plots/part_d_cross_validation.png`, fold errors and notes to `results/`,
+`plots/part_d_cross_validation.png`, fold errors to `results/`,
 and the selected model refitted on all 100 rows to `results/part_d_model.npz`.
 
 ## Part E
@@ -92,8 +94,8 @@ are used only for testing. A fixed permutation (seed 572) supplies nested
 centre sets. The Gaussian width is fixed at sigma = 1 in standardized feature
 space, since the assignment does not specify it. No test-based tuning is used.
 The script saves `plots/part_e_rmse.png`, `results/part_e_errors.csv`,
-`results/part_e_centre_order.csv` (zero-based training indices), and
-`results/part_e_notes.md`.
+and `results/part_e_centre_order.csv` (zero-based training indices).
+Discussion is maintained separately in `results/part_e_notes.md`.
 
 ## Part F
 
@@ -103,5 +105,5 @@ Ten-fold CV uses only the first 100 rows with seed 572. Each fold learns
 normalization and selects centres exclusively from its 90 training rows;
 all 90 rows become centres. The bias is unpenalized, and the objective uses
 summed squared residuals. Outputs include `plots/part_f_cross_validation.png`,
-`results/part_f_cv_errors.csv`, `results/part_f_notes.md`, and the selected
+`results/part_f_cv_errors.csv`, and the selected
 model refitted on all 100 rows in `results/part_f_model.npz`.

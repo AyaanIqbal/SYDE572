@@ -87,13 +87,6 @@ def main():
     fig.savefig(plots / "part_f_cross_validation.png", dpi=200)
     plt.close(fig)
     np.savez(output / "part_f_model.npz", **gaussian_regression_reg(x, y, chosen))
-    (output / "part_f_notes.md").write_text(f"""# Part F: regularized Gaussian regression
-
-Based on the 10-fold cross-validation results, choosing **λ = {chosen:g}**
-gives the lowest mean validation RMSE of **{means[best]:.6f}** ($1000) among
-the tested values. The unregularized baseline (λ = 0) has a mean validation
-RMSE of {means[0]:.6f}, shown as a horizontal line.
-""")
     for value, error in zip(LAMBDAS, means):
         print(f"lambda = {value:7g}: mean validation RMSE = {error:.6f}")
     print(f"Selected lambda: {chosen:g}")

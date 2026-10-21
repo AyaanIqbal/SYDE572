@@ -87,13 +87,6 @@ def main():
     fig.savefig(plots / "part_d_cross_validation.png", dpi=200)
     plt.close(fig)
 
-    (output / "part_d_notes.md").write_text(f"""# Part D: regularized polynomial regression
-
-Based on the 10-fold cross-validation results, choosing **λ = {chosen:g}**
-gives the lowest mean validation RMSE of **{means[best]:.6f}** ($1000) among
-the tested values. The unregularized baseline (λ = 0) has a mean validation
-RMSE of {means[0]:.6f}, shown as a horizontal line.
-""")
     # Preserve the selected model refitted on all 100 training observations.
     model = polynomial_regression_reg(x, y, chosen)
     np.savez(output / "part_d_model.npz", **model, regularization=chosen)
