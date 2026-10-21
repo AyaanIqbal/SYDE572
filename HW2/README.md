@@ -1,4 +1,4 @@
-# Assignment 2 — Parts A–C
+# Assignment 2 — Parts A–E
 
 From the repository root:
 
@@ -7,6 +7,8 @@ python -m pip install -r HW2/requirements.txt
 python HW2/part_a.py
 python HW2/part_b.py
 python HW2/part_c.py
+python HW2/part_d.py
+python HW2/part_e.py
 ```
 
 With this repository's existing environment, run `.venv/bin/python HW2/part_a.py`.
@@ -53,3 +55,26 @@ learned polynomial across the complete observed feature range. Shading marks
 values beyond the training feature range. Errors are saved to
 `results/part_c_errors.csv`; brief report comments are in
 `results/part_c_notes.md`.
+
+## Part D
+
+Run `.venv/bin/python HW2/part_d.py` to compare lambda values 0, 0.01, 0.1,
+1, 10, 100, and 1000 for a degree-8 ZN-only polynomial. Ten-fold CV uses
+only the first 100 observations, with shuffled folds (seed 572) shared across
+candidates and normalization fitted separately within each training fold.
+The objective is summed squared error plus lambda times squared non-bias
+weights; the bias is not penalized. The script saves the semilog plot to
+`plots/part_d_cross_validation.png`, fold errors and notes to `results/`,
+and the selected model refitted on all 100 rows to `results/part_d_model.npz`.
+
+## Part E
+
+Run `.venv/bin/python HW2/part_e.py` to fit unregularized Gaussian regression
+with 5, 15, ..., 95 basis functions plus a bias, using all 13 features.
+The first 100 rows determine normalization and centres; the other 406 rows
+are used only for testing. A fixed permutation (seed 572) supplies nested
+centre sets. The Gaussian width is fixed at sigma = 1 in standardized feature
+space, since the assignment does not specify it. No test-based tuning is used.
+The script saves `plots/part_e_rmse.png`, `results/part_e_errors.csv`,
+`results/part_e_centre_order.csv` (zero-based training indices), and
+`results/part_e_notes.md`.
