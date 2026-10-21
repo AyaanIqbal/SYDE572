@@ -1,5 +1,17 @@
 # Assignment 2 — Parts A–F
 
+## Website updates
+
+The course homepage links to `HW2/index.html`. This page displays plots directly
+from `plots/` and loads the current notes, CSV tables, and Python source from
+their original paths. There are no copied website results to synchronize.
+After changing a model, rerun its Python script to regenerate its results,
+then commit and push the changed source and outputs to `main`. GitHub Pages
+publishes those changes using the repository's existing Pages configuration.
+Local uncommitted edits do not update the public website. To preview locally,
+run `python -m http.server 8000` from the repository root and visit
+`http://localhost:8000/HW2/` (fetching notes requires HTTP, not a file URL).
+
 From the repository root:
 
 ```sh
