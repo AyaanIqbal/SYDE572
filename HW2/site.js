@@ -85,5 +85,15 @@ async function populate(node, attribute, render) {
 document.querySelectorAll("[data-notes]").forEach(node => populate(node, "notes", renderNotes));
 document.querySelectorAll("[data-csv]").forEach(node => populate(node, "csv", text =>
   renderTable(text.trim().split(/\r?\n/).map(line => line.split(",")))));
+function sourceExcerpt(text) {
+  const regions = [...text.matchAll(/^[ \t]*# website-excerpt-start\r?\n([\s\S]*?)^[ \t]*# website-excerpt-end/gm)];
+  if (!regions.length) throw new Error("Code excerpt unavailable; use the full source download.");
+  return regions.map(match => {
+    const lines = match[1].trimEnd().split("\n");
+    const indent = Math.min(...lines.filter(line => line.trim()).map(line => line.match(/^ */)[0].length));
+    return lines.map(line => line.slice(indent)).join("\n");
+  }).join("\n\n# ...\n\n");
+}
+
 document.querySelectorAll("[data-source]").forEach(node => populate(node, "source", text =>
-  document.createTextNode(text)));
+  document.createTextNode(sourceExcerpt(text))));

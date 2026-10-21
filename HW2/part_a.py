@@ -16,10 +16,12 @@ def polynomial_basis(x, degree):
     """Return [1, x1, x1**2, ..., x2, x2**2, ...], without cross-terms."""
     if degree < 1:
         raise ValueError("degree must be at least 1")
+    # website-excerpt-start
     columns = [np.ones(x.shape[0])]
     columns.extend(x[:, j] ** power for j in range(x.shape[1])
                    for power in range(1, degree + 1))
     return np.column_stack(columns)
+    # website-excerpt-end
 
 
 def rmse(actual, predicted):
@@ -33,12 +35,14 @@ def polynomial_regression(x_train, y_train, x_test, y_test, degree):
     least squares handles redundant columns (e.g. powers of binary features)
     without explicitly inverting the normal-equation matrix.
     """
+    # website-excerpt-start
     mean = x_train.mean(axis=0)
     scale = x_train.std(axis=0)
     scale = np.where(scale == 0, 1.0, scale)
     train_basis = polynomial_basis((x_train - mean) / scale, degree)
     test_basis = polynomial_basis((x_test - mean) / scale, degree)
     weights, _, rank, _ = np.linalg.lstsq(train_basis, y_train, rcond=None)
+    # website-excerpt-end
     return {
         "degree": degree,
         "weights": weights,

@@ -13,10 +13,12 @@ def main():
         names = next(reader)[:-1]
     data = np.loadtxt(path, delimiter=",", skiprows=2)
     x, y = data[:, :-1], data[:, -1]
+    # website-excerpt-start
     result = polynomial_regression(x[:100], y[:100], x[100:], y[100:], 1)
     weights = result["weights"]
     slopes = weights[1:] / result["scale"]
     intercept = weights[0] - result["mean"] @ slopes
+    # website-excerpt-end
 
     # Converting units must preserve predictions on both train and test rows.
     normalized = (x - result["mean"]) / result["scale"]

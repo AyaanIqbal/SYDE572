@@ -9,9 +9,11 @@ def gaussian_basis(x, centres, sigma=1.0):
     """Bias plus exp(-||x-centre||^2 / (2 sigma^2)); inputs standardized."""
     if not np.isfinite(sigma) or sigma <= 0:
         raise ValueError("sigma must be positive and finite")
+    # website-excerpt-start
     squared_distances = np.sum((x[:, None, :] - centres[None, :, :]) ** 2, axis=2)
     return np.column_stack([np.ones(len(x)),
                             np.exp(-squared_distances / (2 * sigma ** 2))])
+    # website-excerpt-end
 
 
 def gaussian_regression(x_train, y_train, x_test, y_test, n_basis,
@@ -23,6 +25,7 @@ def gaussian_regression(x_train, y_train, x_test, y_test, n_basis,
     """
     if not 1 <= n_basis <= len(x_train):
         raise ValueError("n_basis must be between 1 and the training size")
+    # website-excerpt-start
     mean = x_train.mean(axis=0)
     scale = x_train.std(axis=0)
     scale = np.where(scale == 0, 1.0, scale)
@@ -33,6 +36,7 @@ def gaussian_regression(x_train, y_train, x_test, y_test, n_basis,
     train_basis = gaussian_basis(train, centres, sigma)
     test_basis = gaussian_basis(test, centres, sigma)
     weights, _, rank, _ = np.linalg.lstsq(train_basis, y_train, rcond=None)
+    # website-excerpt-end
     return {"n_basis": n_basis, "weights": weights, "mean": mean,
             "scale": scale, "centres": centres, "centre_indices": indices,
             "sigma": sigma, "rank": int(rank),

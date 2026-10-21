@@ -16,6 +16,7 @@ def polynomial_regression_reg(x_train, y_train, regularization, degree=8):
     """
     if regularization < 0:
         raise ValueError("regularization must be nonnegative")
+    # website-excerpt-start
     mean = x_train.mean(axis=0)
     scale = x_train.std(axis=0)
     scale = np.where(scale == 0, 1.0, scale)
@@ -24,6 +25,7 @@ def polynomial_regression_reg(x_train, y_train, regularization, degree=8):
     augmented = np.vstack([basis, np.sqrt(regularization) * penalty])
     targets = np.concatenate([y_train, np.zeros(len(penalty))])
     weights = np.linalg.lstsq(augmented, targets, rcond=None)[0]
+    # website-excerpt-end
     return {"weights": weights, "mean": mean, "scale": scale, "degree": degree}
 
 
@@ -40,6 +42,7 @@ def cross_validate(x, y, lambdas=LAMBDAS, seed=572):
     """
     if len(x) != 100 or len(y) != 100:
         raise ValueError("Part D cross-validation requires the first 100 rows")
+    # website-excerpt-start
     folds = np.array_split(np.random.default_rng(seed).permutation(len(y)), 10)
     errors = np.empty((len(lambdas), 10))
     for fold_index, validation in enumerate(folds):
@@ -48,15 +51,18 @@ def cross_validate(x, y, lambdas=LAMBDAS, seed=572):
             model = polynomial_regression_reg(x[training], y[training], regularization)
             errors[j, fold_index] = rmse(y[validation], predict(model, x[validation]))
     return errors
+    # website-excerpt-end
 
 
 def main():
     data = np.loadtxt(ROOT / "data/boston_house_prices.csv", delimiter=",", skiprows=2)
     x, y = data[:100, 1:2], data[:100, -1]
+    # website-excerpt-start
     errors = cross_validate(x, y)
     means = errors.mean(axis=1)
     best = int(np.argmin(means))
     chosen = LAMBDAS[best]
+    # website-excerpt-end
     plots, output = ROOT / "plots", ROOT / "results"
     plots.mkdir(exist_ok=True)
     output.mkdir(exist_ok=True)

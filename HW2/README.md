@@ -12,6 +12,11 @@ Local uncommitted edits do not update the public website. To preview locally,
 run `python -m http.server 8000` from the repository root and visit
 `http://localhost:8000/HW2/` (fetching notes requires HTTP, not a file URL).
 
+Each part displays only key code excerpts, read directly from regions marked
+`website-excerpt-start` / `website-excerpt-end` in its Python file. Full-source
+download links retain the complete runnable files. Keep these markers around
+the relevant calculations when editing so the displayed snippets stay current.
+
 From the repository root:
 
 ```sh

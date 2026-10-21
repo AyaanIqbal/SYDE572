@@ -16,11 +16,13 @@ def polynomial_regression_1d_vis(x_train, y_train, x_test, y_test, degree):
         raise ValueError("x_train must contain exactly one feature column")
     if x_test.ndim != 2 or x_test.shape[1] != 1:
         raise ValueError("x_test must contain exactly one feature column")
+    # website-excerpt-start
     result = polynomial_regression(x_train, y_train, x_test, y_test, degree)
     grid = np.linspace(min(x_train.min(), x_test.min()),
                        max(x_train.max(), x_test.max()), 1500).reshape(-1, 1)
     normalized_grid = (grid - result["mean"]) / result["scale"]
     predictions = polynomial_basis(normalized_grid, degree) @ result["weights"]
+    # website-excerpt-end
 
     fig, ax = plt.subplots(figsize=(9, 5.5))
     ax.scatter(x_test[:, 0], y_test, s=22, alpha=0.45, color="tab:orange",
