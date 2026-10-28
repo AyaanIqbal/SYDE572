@@ -1,0 +1,19 @@
+{
+  "explained_variance_ratio": [
+    0.9246187232017271,
+    0.053066483117067756,
+    0.017102609807929773,
+    0.0052121838732753735
+  ],
+  "cumulative_variance_ratio": [
+    0.9246187232017271,
+    0.9776852063187949,
+    0.9947878161267246,
+    1.0
+  ],
+  "two_pc_retained_fraction": 0.9776852063187949,
+  "pcs_for_50_percent": 1,
+  "centered_frobenius_squared_cm2": 681.3706,
+  "two_pc_residual_squared_cm2": 15.204644359438952,
+  "two_pc_rmse_per_feature_cm": 0.1591887996449444
+}
