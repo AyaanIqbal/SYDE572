@@ -15,13 +15,15 @@ From the repository root:
 .venv/bin/python HW3/part5.py
 ```
 
-Parts 3–5 import plotting helpers from `part2.py`; keep these files together.
-The scripts work from any working directory and save outputs beside the source.
-After dependencies are installed, they use the bundled Iris data without network
-access. PCA centers measurements in centimetres without standardizing or whitening.
-Species labels colour plots; they do not fit either dimensionality reduction.
-The scikit-learn dataset includes two corrected observations compared with the
-older UCI `iris.data` file; all results use this version consistently.
+Parts 3–5 import plotting helpers from `part2.py`, so keep these files together.
+You can run the scripts from any working directory, and they will save outputs
+beside the source files. Once dependencies are installed, the scripts use the
+bundled Iris data without needing network access.
+
+PCA centers the measurements in centimetres without standardizing or whitening
+them, and species labels are used only to colour the plots. All results use the
+scikit-learn dataset, which includes two corrected observations compared with
+the older UCI `iris.data` file.
 
 ## Files
 
@@ -34,10 +36,11 @@ older UCI `iris.data` file; all results use this version consistently.
   `results/part5_diagnostics.json`: ISOMAP comparison and graph diagnostics.
 - `results/part2_notes.md` through `results/part5_notes.md`: written discussion.
 
-The website loads current notes, tables, and complete source from their original
-files. The HTML also contains fallback discussion for readers without JavaScript;
-update it alongside the notes if editing the discussion. Scripts do not overwrite
-notes. The 1D plots use species rows only as display offsets.
+The website loads notes, tables, and complete source directly from their original
+files, while the HTML contains fallback discussion for readers without JavaScript.
+If you edit the discussion, update both the notes and that fallback text to keep
+them consistent. Running the Python scripts will not overwrite your notes.
+In the 1D plots, the species rows are display offsets that make points easier to see.
 
 ## Preview and publication
 
@@ -48,8 +51,10 @@ Local edits are not public until committed and pushed.
 
 ## Interpretation
 
-Two PCs explain 97.7685% of original variance; PC1 alone exceeds 50%.
-The three-neighbour ISOMAP graph has two components. Scikit-learn completes the
-graph to embed it; warnings are preserved in the diagnostics. Scikit-learn uses
-classical MDS via kernel eigendecomposition, rather than iterative gradient-descent
-MDS. See the website for the full comparison and source references.
+Two PCs explain 97.7685% of the original variance, and PC1 alone exceeds the
+50% target. The three-neighbour ISOMAP graph has two disconnected components,
+which scikit-learn connects before producing the embedding. The diagnostics
+preserve the resulting warnings so this limitation remains visible.
+
+Scikit-learn uses classical MDS through kernel eigendecomposition for the embedding
+step. See the website for the full comparison and source references.
