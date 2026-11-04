@@ -1,0 +1,3 @@
+PCA centers all four measurements without standardizing or whitening. The mean, in feature order (sepal length, sepal width, petal length, petal width), is (5.843333, 3.057333, 3.758000, 1.199333) cm. A score is z_j = (x − μ) · w_j.
+
+The rows of the table below are unit, mutually orthogonal PCA axes. Reversing the sign of an axis reflects the plot without changing its information. PC1 is dominated by petal length and separates setosa. The first two PCs show broad species groups with partial versicolor/virginica overlap; adding PC3 retains more detail. PCA maximizes variance, rather than species separation.
