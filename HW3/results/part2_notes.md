@@ -1,3 +1,3 @@
-Using petal length alone clearly separates setosa from the other species, although versicolor and virginica overlap. In this 1D view, the species are placed on separate rows to make the points easier to see, so separation should be judged along the horizontal axis.
+Petal length alone clearly separates setosa, but versicolor and virginica overlap. The species occupy separate rows in the 1D plot for visibility, so only the horizontal position represents a feature.
 
-Plotting petal length against petal width gives a clearer view of the class structure, with setosa forming a distinct cluster and the other two species forming groups that overlap near their boundary. Adding sepal length in the 3D view preserves this pattern without completely separating versicolor and virginica. Among these selected views, the 2D petal plot is the easiest to interpret while still showing the main species groupings.
+The 2D petal length and width plot shows the clearest clusters, with setosa fully separated and some overlap between the other species. Adding sepal length in 3D does not remove this overlap, making the 2D view the easiest of these projections to interpret.
