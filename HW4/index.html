@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SYDE 572 — Homework 4</title>
+  <link rel="stylesheet" href="../HW1/docs/style.css">
+  <link rel="canonical" href="https://ayaaniqbal.github.io/SYDE572/HW4/">
+</head>
+<body>
+  <header>
+    <a href="../">All homework</a>
+    <a href="https://github.com/AyaanIqbal/SYDE572/tree/main/HW4">GitHub repository ↗</a>
+  </header>
+  <main>
+    <h1>Homework 4</h1>
+    <p>Text classification with Naive Bayes</p>
+    <p>The classifier correctly predicted the sentiment of <strong>1,943 of 2,383 test reviews (81.54%)</strong>.</p>
+    <p><a href="https://github.com/AyaanIqbal/SYDE572/blob/main/HW4/report.md">Full report</a> ·
+      <a href="https://github.com/AyaanIqbal/SYDE572/tree/main/HW4#assignment-4---naive-bayes-sentiment-classification">Run instructions</a></p>
+
+    <section>
+      <h2>Data and classifier</h2>
+      <p>The first 9,531 reviews in the supplied shuffled dataset were used for training. The remaining 2,383 were held out for evaluation. The model uses review tokens as features and positive or negative sentiment as the label.</p>
+      <p>The Python implementation estimates class priors from document counts and word likelihoods from token counts. Laplace smoothing adds one to each word count in the training vocabulary. For each review, the classifier adds the log prior to the log likelihoods of its known words, then picks the class with the higher score.</p>
+      <p><a href="naive_bayes.py" download>Classifier source</a> · <a href="run_assignment.py" download>Experiment source</a></p>
+    </section>
+
+    <section>
+      <h2>Sanity checks and evaluation</h2>
+      <p>The model scored “great” higher for positive reviews and “bad” higher for negative reviews. It also handled a short review containing an unseen token. The held-out accuracy of 81.54% compares with 51.62% for always choosing the most common evaluation label.</p>
+      <table>
+        <caption>Held-out predictions by sentiment</caption>
+        <thead><tr><th scope="col">True label</th><th scope="col">Predicted negative</th><th scope="col">Predicted positive</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Negative</th><td>1,036</td><td>194</td></tr>
+          <tr><th scope="row">Positive</th><td>246</td><td>907</td></tr>
+        </tbody>
+      </table>
+      <p><a href="results/metrics.json">Evaluation metrics</a> · <a href="results/predictions.csv" download>Review predictions</a></p>
+    </section>
+
+    <section>
+      <h2>Error analysis</h2>
+      <p>One camera bag review praised the fit but complained that the bag could hold only one lens. Words such as “fits” and “nicely” pushed the model toward positive. In another review, “ridiculous” and “shoddy” pushed the prediction toward negative even though the criticism was directed at other DVD collections. Both examples show what the model loses when it counts words independently.</p>
+      <p><a href="results/error_examples.json">Misclassified reviews and word contributions</a></p>
+    </section>
+
+    <section>
+      <h2>Optional learning curve</h2>
+      <p>With the same test set, accuracy increased from 75.83% with 953 training reviews to 81.54% with 9,531. The gains were smaller at larger training sizes.</p>
+      <figure>
+        <a href="plots/evaluation.png"><img src="plots/evaluation.png" alt="Test accuracy rises from about 76% to 82% as the training set grows. The confusion matrix shows 1,036 correct negative and 907 correct positive predictions."></a>
+        <figcaption>Test accuracy by training set size and confusion matrix for the full training set.</figcaption>
+      </figure>
+      <p><a href="results/learning_curve.csv" download>Learning curve data</a></p>
+    </section>
+  </main>
+  <footer>SYDE 572 · Homework 4</footer>
+</body>
+</html>

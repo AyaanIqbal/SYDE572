@@ -134,5 +134,4 @@ repository root, after installing `HW4/requirements.txt`. Run checks with
 `.venv/bin/python -m unittest discover -s HW4 -p 'test_*.py'`.
 
 This report covers all mandatory tasks plus the optional learning curve. The
-other optional tasks have not been implemented. Source requirements are in the
-supplied assignment handout, retained locally as `assignment.pdf`.
+other optional tasks have not been implemented.
