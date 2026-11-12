@@ -1,0 +1,266 @@
+[
+  {
+    "line": 11288,
+    "topic": "software",
+    "document_id": "325.txt",
+    "true": "pos",
+    "predicted": "neg",
+    "tokens": 68,
+    "margin": 14.5478940347013,
+    "text": "the only problem that i had , was loading the actual program on the three computers that i have.you had to delete your old norton antivirus 2006 before starting.also i have one more problem that after i loaded the norton antivirus 2007 - 3 users on the last computer i still get a error that i need to down load the latest updates , which i already did",
+    "strongest_wrong_evidence": [
+      [
+        "norton",
+        2.7758828047756623
+      ],
+      [
+        "error",
+        1.8424477822304652
+      ],
+      [
+        "antivirus",
+        1.5709356737467708
+      ],
+      [
+        "problem",
+        1.2669383360995816
+      ],
+      [
+        "i",
+        0.8960751372634461
+      ],
+      [
+        "actual",
+        0.7828275713132093
+      ],
+      [
+        "updates",
+        0.6099386706395968
+      ],
+      [
+        "2007",
+        0.6080167019526268
+      ]
+    ]
+  },
+  {
+    "line": 11713,
+    "topic": "software",
+    "document_id": "269.txt",
+    "true": "pos",
+    "predicted": "neg",
+    "tokens": 70,
+    "margin": 14.476645093192872,
+    "text": "i have used synmatec products for many years and have been fairly pleased by them . however , do n't buy the upgrade or renew your subscription until after your current subscription runs out because synmatec will not give you credit for the un-used portion of your previous subscription . i asked and they said \" no way \" . that aspect of \" customer service \" is very disappointing",
+    "strongest_wrong_evidence": [
+      [
+        "subscription",
+        4.8516035421584345
+      ],
+      [
+        "disappointing",
+        2.3103483612794236
+      ],
+      [
+        "customer",
+        1.4939029643749855
+      ],
+      [
+        "renew",
+        1.474100337078804
+      ],
+      [
+        "service",
+        1.1196207837035068
+      ],
+      [
+        "credit",
+        0.778468683191198
+      ],
+      [
+        "said",
+        0.5556487164353108
+      ],
+      [
+        "asked",
+        0.5092430296331294
+      ]
+    ]
+  },
+  {
+    "line": 11090,
+    "topic": "dvd",
+    "document_id": "326.txt",
+    "true": "neg",
+    "predicted": "pos",
+    "tokens": 60,
+    "margin": 10.47956392364938,
+    "text": "i live in south africa where the series appeared 20 years ago.thanks to amazon i was able to relive the wonder of archie bunker where each episode provides laughs from one of the family , each of whom is brilliantly cast.i have series 3&4 and now want 1&2.do n't wait any longer , 24 episodes of absolute delight await you",
+    "strongest_wrong_evidence": [
+      [
+        "brilliantly",
+        1.666213165286294
+      ],
+      [
+        "delight",
+        1.5326817726617712
+      ],
+      [
+        "episode",
+        1.2449997002099895
+      ],
+      [
+        "relive",
+        1.0908490203827323
+      ],
+      [
+        "await",
+        1.0908490203827323
+      ],
+      [
+        "each",
+        1.0294194834595878
+      ],
+      [
+        "provides",
+        0.8769221241734471
+      ],
+      [
+        "series",
+        0.7356977533462103
+      ]
+    ]
+  },
+  {
+    "line": 9849,
+    "topic": "health",
+    "document_id": "421.txt",
+    "true": "pos",
+    "predicted": "neg",
+    "tokens": 61,
+    "margin": 10.389225497875316,
+    "text": "i bought another one of these because i dropped my orginal at the grocery store and broke the bulb.i tried contacting the company with this new one.u cannot get an answer . the company seems to have a non working number . other than that , the product ok and i havent been sick since i have used it . /",
+    "strongest_wrong_evidence": [
+      [
+        "contacting",
+        1.8795654451869694
+      ],
+      [
+        "company",
+        1.7304270002731954
+      ],
+      [
+        "ok",
+        1.2241585926098715
+      ],
+      [
+        "broke",
+        0.8550611286725829
+      ],
+      [
+        "havent",
+        0.7009104488453239
+      ],
+      [
+        "working",
+        0.6832108717459224
+      ],
+      [
+        "dropped",
+        0.5418457542156361
+      ],
+      [
+        "i",
+        0.5120429355791121
+      ]
+    ]
+  },
+  {
+    "line": 10624,
+    "topic": "camera",
+    "document_id": "142.txt",
+    "true": "neg",
+    "predicted": "pos",
+    "tokens": 54,
+    "margin": 9.864947714974392,
+    "text": "this bag is very small . my canon 20d fits nicely with a small lens , but you cannot fit more than one lens with the camera body . we kept the bag for informal use when we only need the body and one lens to avoid always having to carry a bulky bag",
+    "strongest_wrong_evidence": [
+      [
+        "lens",
+        2.479387531603418
+      ],
+      [
+        "bag",
+        1.59707617490713
+      ],
+      [
+        "fits",
+        1.1737366801884992
+      ],
+      [
+        "nicely",
+        1.1553875415203034
+      ],
+      [
+        "carry",
+        0.9437956024262366
+      ],
+      [
+        "informal",
+        0.6853839122745669
+      ],
+      [
+        "always",
+        0.609342949828247
+      ],
+      [
+        "20d",
+        0.6053412046010322
+      ]
+    ]
+  },
+  {
+    "line": 10149,
+    "topic": "dvd",
+    "document_id": "504.txt",
+    "true": "pos",
+    "predicted": "neg",
+    "tokens": 52,
+    "margin": 8.98559800196142,
+    "text": "got this on ebay for $18 last year - a great deal . i am only bothering to rate this as it seems ridiculous that is rated below two other rather shoddy grant collections because of the holiday backlash . objectively rating the content instead of the marketing would work for me",
+    "strongest_wrong_evidence": [
+      [
+        "ridiculous",
+        2.0406847943303212
+      ],
+      [
+        "$18",
+        1.953673417340692
+      ],
+      [
+        "shoddy",
+        1.7125113605238038
+      ],
+      [
+        "bothering",
+        0.9240540001595328
+      ],
+      [
+        "marketing",
+        0.9240540001595328
+      ],
+      [
+        "holiday",
+        0.8406723912204814
+      ],
+      [
+        "instead",
+        0.7333138728999815
+      ],
+      [
+        "below",
+        0.7180048822046228
+      ]
+    ]
+  }
+]

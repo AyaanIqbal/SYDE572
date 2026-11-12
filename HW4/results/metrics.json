@@ -1,0 +1,43 @@
+{
+  "total": 11914,
+  "training": 9531,
+  "evaluation": 2383,
+  "training_labels": {
+    "neg": 4684,
+    "pos": 4847
+  },
+  "evaluation_labels": {
+    "neg": 1230,
+    "pos": 1153
+  },
+  "vocabulary": 52392,
+  "alpha": 1.0,
+  "correct": 1943,
+  "accuracy": 0.8153587914393622,
+  "majority_baseline": 0.5161561057490558,
+  "wilson_95": [
+    0.7992770430657347,
+    0.8304254428055354
+  ],
+  "confusion": {
+    "neg": {
+      "neg": 1036,
+      "pos": 194
+    },
+    "pos": {
+      "neg": 246,
+      "pos": 907
+    }
+  },
+  "sanity_checks": {
+    "great": {
+      "neg": 0.0005283997934747295,
+      "pos": 0.0013212141496043825
+    },
+    "bad": {
+      "neg": 0.0004547440646873432,
+      "pos": 0.00017230368700664423
+    }
+  },
+  "unknown_token_check": "pos"
+}
