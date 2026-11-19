@@ -1,7 +1,7 @@
 # Assignment 4 - Naive Bayes sentiment classification
 
 The first implementation covers all required tasks and the optional learning
-curve. See the [assignment website](https://ayaaniqbal.github.io/SYDE572/HW4/) and [report](report.md). Held-out accuracy is **81.54%**
+curve. See the [assignment website](https://ayaaniqbal.github.io/SYDE572/HW4/) and [PDF report](output/pdf/assignment4_report.pdf). Held-out accuracy is **81.54%**
 (1,943 / 2,383). The classifier uses no machine-learning toolkit.
 
 From the repository root:
@@ -22,3 +22,6 @@ plots. The written report is maintained separately.
 - `test_naive_bayes.py`: independent analytical checks.
 - `results/`: numerical results and traceable predictions.
 - `plots/evaluation.png`: learning curve and confusion matrix.
+
+The PDF is generated from `report.md` using `build_report.py`. Run it with a
+Python environment containing ReportLab after updating the report or plot.

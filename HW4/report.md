@@ -48,7 +48,8 @@ smoothed word likelihood:
 
 Both directions agree with the assignment's sanity checks. The document
 `['a', 'top-quality', 'performance']` is processed without error and classified
-as positive. Independent tests verify hand-calculated smoothed likelihoods,
+as positive. Additional multiword checks classify `['excellent', 'product']`
+as positive and `['terrible', 'purchase']` as negative. Independent tests verify hand-calculated smoothed likelihoods,
 repeated-word contributions, likelihood normalization, handling of unknown
 words, generic class labels, and invalid inputs. All three test methods pass.
 
@@ -83,27 +84,32 @@ toward the incorrect class are saved in `results/error_examples.json`.
 Line numbers below are one-based lines in the supplied file.
 
 1. **Software, line 11288, 325.txt: true pos, predicted neg.** The review
+   includes "i still get a error that i need to down load the latest updates". It
    describes installation problems and an update error despite its positive
    label. The words `norton`, `error`, `antivirus`, and `problem` contribute
    strongly toward negative. A positive overall rating can coexist with a
    complaint-focused text; the available text gives limited positive evidence.
 2. **Health, line 9849, 421.txt: true pos, predicted neg.** The writer complains
-   that the company cannot be contacted but ends by saying the product is okay
+   that "u cannot get an answer" but also says "i havent been sick since i have used it".
+   The company cannot be contacted, but the reviewer says the product is okay
    and they have not been sick. `contacting`, `company`, and `broke` outweigh
    this qualified approval. Independent token counts do not capture the
    contrast between customer service and product effectiveness, and do not
    interpret `havent been sick` compositionally.
 3. **Camera, line 10624, 142.txt: true neg, predicted pos.** A camera bag is too
-   small and cannot fit additional lenses, but the reviewer also says it fits
+   small. The text says "fits nicely with a small lens" and "you cannot fit more
+   than one lens with the camera body". The reviewer also says it fits
    nicely and can serve an informal purpose. `lens`, `bag`, `fits`, and `nicely`
    favor positive. Topic-associated vocabulary and qualified praise obscure
    the key size limitation; the model cannot interpret the scope of `cannot`.
 4. **DVD, line 10149, 504.txt: true pos, predicted neg.** The reviewer calls
-   the purchase a great deal but criticizes other collections and the surrounding
+   the purchase "a great deal" but refers to "two other rather shoddy grant
+   collections". The reviewer criticizes other collections and the surrounding
    ratings. Negative words such as `ridiculous` and `shoddy` target the comparison,
    rather than the purchased content. Bag-of-words counts lose that target.
 5. **DVD, line 11090, 326.txt: true neg, predicted pos.** The text praises the
-   cast and describes the episodes as a delight. The positive prediction is
+   cast as "brilliantly cast" and says "24 episodes of absolute delight await you".
+   The positive prediction is
    understandable; the supplied negative label appears inconsistent with the
    text. This suggests possible label noise, but the original rating is not
    supplied, so a labeling error cannot be established. Evaluation retains
